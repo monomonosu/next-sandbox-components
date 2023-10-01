@@ -4,14 +4,18 @@ import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 
 const CustomReactCalendar = styled(ReactCalendar)`
+  border: 0px;
+
   .react-calendar__tile.highlight {
     background: lightblue;
+    border-radius: 50%;
   }
 
   /* highlightクラスが適用されているときのhoverおよびfocusスタイル */
   .react-calendar__tile.highlight:enabled:hover,
   .react-calendar__tile.highlight:enabled:focus {
     background: lightblue;
+    border-radius: 50%;
   }
 
   /* アクティブなタイルのスタイルをリセット */
@@ -23,6 +27,16 @@ const CustomReactCalendar = styled(ReactCalendar)`
   .react-calendar__tile--active:enabled:hover,
   .react-calendar__tile--active:enabled:focus {
     background: transparent;
+  }
+
+  // 土曜日の文字を青色に
+  .react-calendar__tile:nth-of-type(7n) {
+    color: #0066ff;
+  }
+
+  // 来月の文字はグレーに
+  .react-calendar__month-view__days__day--neighboringMonth {
+    color: #757575 !important;
   }
 `;
 
@@ -56,6 +70,9 @@ export const BasicReactCalendar = () => {
     <div>
       <CustomReactCalendar
         onChange={(e) => onChange(e as Date)}
+        calendarType="US"
+        locale="ja"
+        minDate={new Date()}
         tileClassName={({ date, view }) => {
           if (
             view === "month" &&
