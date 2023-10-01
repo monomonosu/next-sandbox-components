@@ -6,15 +6,24 @@ import styled from "@emotion/styled";
 const CustomReactCalendar = styled(ReactCalendar)`
   border: 0px;
 
+  .react-calendar__tile {
+    line-height: 30px;
+  }
+
+  /* 日が表示されるのを防ぐ */
+  abbr {
+    display: none;
+  }
+
   .react-calendar__tile.highlight {
-    background: lightblue;
+    background: #1976d2;
     border-radius: 50%;
   }
 
   /* highlightクラスが適用されているときのhoverおよびfocusスタイル */
   .react-calendar__tile.highlight:enabled:hover,
   .react-calendar__tile.highlight:enabled:focus {
-    background: lightblue;
+    background: #1976d2;
     border-radius: 50%;
   }
 
@@ -82,6 +91,12 @@ export const BasicReactCalendar = () => {
           ) {
             return "highlight"; // 選択された日付のタイルに'highlight'クラスを追加
           }
+        }}
+        tileContent={({ date, view }) => {
+          if (view === "month") {
+            return <span>{date.getDate()}</span>; // 日付のみを返します
+          }
+          return null;
         }}
       />
     </div>
