@@ -33,7 +33,7 @@ export const BasicReactCalendar = () => {
     console.log(selectedDates);
   }, [selectedDates]);
 
-  const onChange = (date) => {
+  const onChange = (date: Date) => {
     if (Array.isArray(date)) {
       return; // 複数の日付が一度に選択されることは想定していないため、この場合は何もしない。
     }
@@ -55,7 +55,7 @@ export const BasicReactCalendar = () => {
   return (
     <div>
       <CustomReactCalendar
-        onChange={(e) => onChange(e)}
+        onChange={(e) => onChange(e as Date)}
         tileClassName={({ date, view }) => {
           if (
             view === "month" &&
